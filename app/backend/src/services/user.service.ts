@@ -12,7 +12,7 @@ export default class UserService {
 
     const user = await User.findOne({ where: { email } });
 
-    if (!user || !bcrypt.compare(password, user.password)) {
+    if (!user || !bcrypt.compareSync(password, user.password)) {
       return { type: 401, message: 'Incorrect email or password' };
     }
 
