@@ -8,5 +8,6 @@ export default class TeamRouter {
   constructor() {
     this.router = express.Router();
     this.router.get('/', TeamController.findAllTeams);
+    this.router.get('/:id', TeamController.findOneTeam);
   }
 }

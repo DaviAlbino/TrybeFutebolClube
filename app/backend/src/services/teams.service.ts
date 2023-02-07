@@ -6,4 +6,10 @@ export default class TeamService {
     const teams = await Team.findAll();
     return teams;
   }
+
+  static async findById(id: number): Promise<ITeams | object> {
+    const team = await Team.findByPk(id);
+    if (!team) throw new Error('Team not found');
+    return team.dataValues;
+  }
 }
