@@ -26,4 +26,11 @@ export default class UserService {
 
     return { type: null, message: token };
   }
+
+  static async getUserRole(id: number) {
+    const user = await User.findByPk(id);
+    if (!user) return { type: 400, message: 'User not found' };
+    const { role } = user;
+    return { type: null, message: role };
+  }
 }
