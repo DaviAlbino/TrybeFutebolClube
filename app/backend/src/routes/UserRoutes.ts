@@ -1,6 +1,7 @@
 import * as express from 'express';
 import verifyToken from '../middelwares/verifyToken';
 import UserController from '../controllers/user.controller';
+//
 
 export default class LoginRouter {
   public router: express.Router;
