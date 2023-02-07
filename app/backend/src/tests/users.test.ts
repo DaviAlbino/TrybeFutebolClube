@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
-import * as jwt from 'jsonwebtoken'
+import * as jwt from 'jsonwebtoken';
+import * as bcrypt from 'bcryptjs';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 
@@ -47,5 +48,30 @@ describe('Testes do post da rota /login', () => {
   
     expect(chaiHttpResponse.status).to.be.equal(200);
     expect(chaiHttpResponse.body.token).to.be.equal(token);
+  });
+
+  it('Retornar status 401 caso o password estiver incorreto', async () => {
+    const message = 'Incorrect email or password';
+    sinon.stub(bcrypt, 'compareSync').callsFake(() => false)
+
+    chaiHttpResponse = await chai
+    .request(app)
+    .post('/login')
+    .send(mockLoginErrorPassword);
+  
+    expect(chaiHttpResponse.status).to.be.equal(401);
+    expect(chaiHttpResponse.body.message).to.be.equal(message);
+  });
+
+  it('Retornar status 400 caso estiver faltando password e/ou email', async () => {
+    const message = 'All fields must be filled';
+
+    chaiHttpResponse = await chai
+    .request(app)
+    .post('/login')
+    .send(mockNoLogin);
+  
+    expect(chaiHttpResponse.status).to.be.equal(400);
+    expect(chaiHttpResponse.body.message).to.be.equal(message);
   });
 });
