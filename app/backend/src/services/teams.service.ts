@@ -1,5 +1,6 @@
 import ITeams from '../interfaces/ITeams';
 import Team from '../database/models/Team.model';
+import IStatusReturn from '../interfaces/IStatusReturn';
 
 export default class TeamService {
   static async findAll(): Promise<ITeams[]> {
@@ -7,9 +8,9 @@ export default class TeamService {
     return teams;
   }
 
-  static async findById(id: number): Promise<ITeams | object> {
+  static async findById(id: number): Promise<IStatusReturn> {
     const team = await Team.findByPk(id);
-    if (!team) throw new Error('Team not found');
-    return team.dataValues;
+    if (!team) return { type: 404, message: 'Team not found' };
+    return { type: null, message: team.dataValues };
   }
 }
