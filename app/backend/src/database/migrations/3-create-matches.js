@@ -21,15 +21,15 @@ module.exports = {
             },
             away_team_id: {
                 type: Sequelize.INTEGER,
-                allowNull: false
-            },
-            away_team_goals: {
-                type: Sequelize.INTEGER,
                 allowNull: false,
                 field: 'away_team_id',
                 references: { model: 'teams', key: 'id' },
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE'
+            },
+            away_team_goals: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
             },
             in_progress: {
                 type: Sequelize.BOOLEAN,
