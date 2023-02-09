@@ -8,4 +8,10 @@ export default class MatchController {
     const matches = await MatchService.findInProgress(inProgressBoolean);
     return res.status(200).json(matches);
   }
+
+  static async saveNewMatch(req: Request, res: Response) {
+    const newMatchBody = req.body;
+    const newMatch = await MatchService.saveNewMatch(newMatchBody);
+    res.status(201).json(newMatch);
+  }
 }

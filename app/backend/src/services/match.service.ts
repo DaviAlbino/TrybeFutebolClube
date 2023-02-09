@@ -18,4 +18,9 @@ export default class MatchService {
     });
     return matches;
   }
+
+  static async saveNewMatch(matchBody: IMatches) {
+    const newMatch = await Match.create({ ...matchBody, inProgress: true });
+    return newMatch;
+  }
 }
