@@ -1,6 +1,7 @@
 import IMatches from '../interfaces/IMatches';
 import Match from '../database/models/Match.model';
 import IStatusReturn from '../interfaces/IStatusReturn';
+import Team from '../database/models/Team.model';
 
 export default class MatchService {
   static async findInProgress(query: boolean): Promise<IMatches[]> {
@@ -20,9 +21,27 @@ export default class MatchService {
     return matches;
   }
 
-  static async saveNewMatch(matchBody: IMatches) {
+  static async findTeamById(id: number): Promise<IStatusReturn> {
+    const team = await Team.findByPk(id);
+    if (!team) return { type: 404, message: 'There is no team with such id!' };
+    return { type: null };
+  }
+
+  static async saveNewMatch(matchBody: IMatches): Promise<IStatusReturn> {
+    const { homeTeamId, awayTeamId } = matchBody;
+    const checkHome = await this.findTeamById(homeTeamId);
+    const checkAway = await this.findTeamById(awayTeamId);
+
+    if (checkAway.type) {
+      return { type: checkAway.type, message: checkAway.message };
+    }
+
+    if (checkHome.type) {
+      return { type: checkHome.type, message: checkHome.message };
+    }
     const newMatch = await Match.create({ ...matchBody, inProgress: true });
-    return newMatch;
+
+    return { type: null, message: newMatch };
   }
 
   static async updateInProgress(id: number): Promise<IStatusReturn> {

@@ -18,7 +18,8 @@ export default class MatchController {
     if (type) return res.status(type).json({ message });
 
     const newMatch = await MatchService.saveNewMatch(newMatchBody);
-    res.status(201).json(newMatch);
+    if (newMatch.type) return res.status(newMatch.type).json({ message: newMatch.message });
+    res.status(201).json(newMatch.message);
   }
 
   static async updateInProgress(req: Request, res: Response) {
