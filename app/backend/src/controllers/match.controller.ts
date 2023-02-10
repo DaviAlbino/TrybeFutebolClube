@@ -20,4 +20,11 @@ export default class MatchController {
     const newMatch = await MatchService.saveNewMatch(newMatchBody);
     res.status(201).json(newMatch);
   }
+
+  static async updateInProgress(req: Request, res: Response) {
+    const { id } = req.params;
+    const { type, message } = await MatchService.updateInProgress(Number(id));
+    if (type) return res.status(type).json({ message });
+    return res.status(200).json({ message });
+  }
 }
