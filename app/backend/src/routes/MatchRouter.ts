@@ -10,5 +10,6 @@ export default class MatchRouter {
     this.router.get('/', MatchController.findAllMatches);
     this.router.post('/', verifyToken, MatchController.saveNewMatch);
     this.router.patch('/:id/finish', verifyToken, MatchController.updateInProgress);
+    this.router.patch('/:id', verifyToken, MatchController.updateGoals);
   }
 }

@@ -2,6 +2,7 @@ import IMatches from '../interfaces/IMatches';
 import Match from '../database/models/Match.model';
 import IStatusReturn from '../interfaces/IStatusReturn';
 import Team from '../database/models/Team.model';
+import IMatchGoals from '../interfaces/IMatchGoals';
 
 export default class MatchService {
   static async findInProgress(query: boolean): Promise<IMatches[]> {
@@ -48,5 +49,16 @@ export default class MatchService {
     const finishedMatch = await Match.update({ inProgress: false }, { where: { id } });
     if (!finishedMatch) return { type: 404, message: 'There is no match here' };
     return { type: null, message: 'Finished' };
+  }
+
+  static async updateGoals({ id, homeTeamGoals, awayTeamGoals }: IMatchGoals) {
+    const matchGoals = await Match.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
+
+    if (!matchGoals) return { type: 404, message: 'there is no match' };
+
+    return { type: null, message: 'Updated new goals!' };
   }
 }

@@ -28,4 +28,15 @@ export default class MatchController {
     if (type) return res.status(type).json({ message });
     return res.status(200).json({ message });
   }
+
+  static async updateGoals(req: Request, res: Response) {
+    const { id } = req.params;
+    const numberId = Number(id);
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const { type, message } = await MatchService
+      .updateGoals({ id: numberId, homeTeamGoals, awayTeamGoals });
+
+    if (type) return res.status(type).json(message);
+    return res.status(200).json({ message });
+  }
 }
