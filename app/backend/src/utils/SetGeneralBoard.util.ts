@@ -4,7 +4,7 @@ import SetLeaderboardRules from './SetLeaderboardRules.util';
 export default class SetGeneralBoard {
   static totalPoints = (homeMatches: IMatchGoals[], awayMatches: IMatchGoals[]) => {
     const allPoints = SetLeaderboardRules
-      .calculatePoints(homeMatches) + SetLeaderboardRules
+      .calculatePoints(homeMatches, 'homeTeam') + SetLeaderboardRules
       .calculatePoints(awayMatches);
     return allPoints;
   };

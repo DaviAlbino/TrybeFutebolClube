@@ -8,5 +8,6 @@ export default class LeaderboardRouter {
     this.router = express.Router();
     this.router.get('/home', LeaderboardController.findAllHomeTeams);
     this.router.get('/away', LeaderboardController.findAwayTeams);
+    this.router.get('/', LeaderboardController.findTeams);
   }
 }

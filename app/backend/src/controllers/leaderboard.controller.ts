@@ -12,4 +12,9 @@ export default class LeaderboardController {
     const allAwayTeams = await LeaderboardService.findAllAwayTemas();
     return res.status(200).json(allAwayTeams);
   };
+
+  static findTeams = async (_req: Request, res: Response) => {
+    const allTeams = await LeaderboardService.findAllTeams();
+    return res.status(200).json(allTeams);
+  };
 }

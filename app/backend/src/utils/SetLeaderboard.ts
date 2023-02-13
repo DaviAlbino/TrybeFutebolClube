@@ -2,8 +2,8 @@ import ILeaderboard from '../interfaces/ILeaderboard';
 import IGeneralBoard from '../interfaces/IGeneralBoard';
 import SetGeneralBoard from './SetGeneralBoard.util';
 
-export default class SetLeaderboardHome {
-  static createHomeLeaderboard = (generalTeams: IGeneralBoard[]): ILeaderboard[] => {
+export default class SetLeaderboard {
+  static createLeaderboard = (generalTeams: IGeneralBoard[]): ILeaderboard[] => {
     const board = generalTeams.map(({ teamName, homeMatches, awayMatches }) => ({
       name: teamName,
       totalPoints: SetGeneralBoard.totalPoints(homeMatches, awayMatches),

@@ -5,6 +5,8 @@ import SetLeaderboardHome from '../utils/SetLeaderboardHome.util';
 import SetLeaderboardAway from '../utils/SetLeaderboardAway.util';
 import IHomeBoard from '../interfaces/IHomeBoard';
 import IAwayBoard from '../interfaces/IAwayBoard';
+import IGeneralBoard from '../interfaces/IGeneralBoard';
+import SetLeaderboard from '../utils/SetLeaderboard';
 
 export default class LeaderboardService {
   static findAllHomeTemas = async () => {
@@ -33,5 +35,27 @@ export default class LeaderboardService {
     });
     return sortLeaderboard(SetLeaderboardAway
       .createAwayLeaderboard(allAwayTeams as unknown as IAwayBoard[]));
+  };
+
+  static findAllTeams = async () => {
+    const allTeams = await Team.findAll({
+      include: [{
+        model: Match,
+        where: { inProgress: false },
+        attributes: ['homeTeamGoals', 'awayTeamGoals'],
+        as: 'homeMatches',
+      },
+      {
+        model: Match,
+        where: { inProgress: false },
+        attributes: ['homeTeamGoals', 'awayTeamGoals'],
+        as: 'awayMatches',
+      }],
+      attributes: ['teamName'],
+    });
+
+    // return allTeams;
+    return sortLeaderboard(SetLeaderboard
+      .createLeaderboard(allTeams as unknown as IGeneralBoard[]));
   };
 }
