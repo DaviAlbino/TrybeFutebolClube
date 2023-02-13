@@ -1,4 +1,5 @@
 import * as express from 'express';
+import LeaderboardRouter from './routes/LeaderboardRouter';
 import MatchRouter from './routes/MatchRouter';
 import TeamRouter from './routes/TeamRouter';
 import LoginRouter from './routes/UserRoutes';
@@ -6,6 +7,7 @@ import LoginRouter from './routes/UserRoutes';
 const userRoutes = new LoginRouter();
 const teamRoutes = new TeamRouter();
 const matchRoutes = new MatchRouter();
+const leaderboardRoutes = new LeaderboardRouter();
 
 class App {
   public app: express.Express;
@@ -20,6 +22,7 @@ class App {
     this.app.use('/login', userRoutes.router);
     this.app.use('/teams', teamRoutes.router);
     this.app.use('/matches', matchRoutes.router);
+    this.app.use('/leaderboard', leaderboardRoutes.router);
   }
 
   private config():void {

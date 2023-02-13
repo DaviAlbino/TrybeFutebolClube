@@ -1,6 +1,7 @@
+import IMatchGoals from './IMatchGoals';
 import ITeams from './ITeams';
 
-export default interface IMatches {
+export default interface IMatches extends IMatchGoals {
   id?: number;
   homeTeamId: number;
   homeTeamGoals: number;
