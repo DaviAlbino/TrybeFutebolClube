@@ -45,6 +45,16 @@ Match.init({
   timestamps: false,
 });
 
+// Match.belongsTo(Team, {
+//   foreignKey: 'home_team_id',
+//   as: 'homeTeam',
+// });
+
+// Match.belongsTo(Team, {
+//   foreignKey: 'away_team_id',
+//   as: 'awayTeam',
+// });
+
 // Match.hasOne(Team, {
 //   foreignKey: 'home_team_id',
 //   as: 'home_team',

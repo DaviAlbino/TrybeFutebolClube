@@ -44,7 +44,9 @@ export default class SetLeaderboardRules {
   static countGames = (matches: IMatchGoals[]) => matches.length;
 
   static setEfficiency = (matches: IMatchGoals[], chosenTeam?: string) => {
-    const efficiency = (this.calculatePoints(matches, chosenTeam) / this.countGames(matches)) * 100;
+    const points = this.calculatePoints(matches, chosenTeam);
+    const games = this.countGames(matches) * 3;
+    const efficiency = (points / games) * 100;
     return efficiency.toFixed(2);
   };
 }
