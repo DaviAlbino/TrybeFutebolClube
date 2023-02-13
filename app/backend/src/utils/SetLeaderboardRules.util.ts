@@ -1,6 +1,6 @@
 import IMatchGoals from '../interfaces/IMatchGoals';
 
-export default class SetLeaderboard {
+export default class SetLeaderboardRules {
   static homeVictory = (matches: IMatchGoals[]) => {
     const homeWinMatches = matches
       .filter(({ homeTeamGoals, awayTeamGoals }) => homeTeamGoals > awayTeamGoals);
