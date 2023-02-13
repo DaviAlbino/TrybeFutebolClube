@@ -3,8 +3,13 @@ import LeaderboardService from '../services/leaderboard.service';
 //
 
 export default class LeaderboardController {
-  static findAllTeams = async (_req: Request, res: Response) => {
+  static findAllHomeTeams = async (_req: Request, res: Response) => {
     const allHomeTeams = await LeaderboardService.findAllHomeTemas();
     return res.status(200).json(allHomeTeams);
+  };
+
+  static findAwayTeams = async (_req: Request, res: Response) => {
+    const allAwayTeams = await LeaderboardService.findAllAwayTemas();
+    return res.status(200).json(allAwayTeams);
   };
 }

@@ -2,8 +2,8 @@ import ILeaderboard from '../interfaces/ILeaderboard';
 import IAwayBoard from '../interfaces/IAwayBoard';
 import SetLeaderboardRules from './SetLeaderboardRules.util';
 
-export default class SetLeaderboardHome {
-  static createHomeLeaderboard = (homeTeams: IAwayBoard[]): ILeaderboard[] => {
+export default class SetLeaderboardAway {
+  static createAwayLeaderboard = (homeTeams: IAwayBoard[]): ILeaderboard[] => {
     const board = homeTeams.map(({ teamName, awayMatches }) => ({
       name: teamName,
       totalPoints: SetLeaderboardRules.calculatePoints(awayMatches),

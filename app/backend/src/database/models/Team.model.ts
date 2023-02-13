@@ -32,7 +32,7 @@ Team.hasMany(Match, {
 
 Team.hasMany(Match, {
   foreignKey: 'away_team_id',
-  as: 'away_team',
+  as: 'awayMatches',
 });
 
 Match.belongsTo(Team, {
